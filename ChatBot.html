@@ -14,7 +14,6 @@
     <script type="text/babel" src="LoginComponent.js"></script>
     <script type="text/babel">
     const THINK_DELAY = 1200;
-    const THINK_ANIMATION_FRAMES = ['Thinking', 'Thinking.', 'Thinking..', 'Thinking...'];
 
     function ChatInput({chatMessages,setChatMessages}){
         const [inputText, setInputText] = React.useState('');
@@ -39,10 +38,12 @@
                 id: crypto.randomUUID()
             };
             const thinkingMessage = {
-                message: THINK_ANIMATION_FRAMES[0],
+                message: '',
                 sender: 'robot',
-                id: crypto.randomUUID()
+                id: crypto.randomUUID(),
+                isThinking: true
             };
+
             setChatMessages([
                 ...chatMessages,
                 userMessage,
@@ -50,20 +51,12 @@
             ]);
             setInputText('');
 
-            // animate the thinking text
-            let frame = 0;
-            const animInterval = setInterval(() => {
-                frame = (frame + 1) % THINK_ANIMATION_FRAMES.length;
-                setChatMessages(prev => prev.map(m => m.id === thinkingMessage.id ? { ...m, message: THINK_ANIMATION_FRAMES[frame] } : m));
-            }, 300);
-
-            // after delay, stop anim and replace with real response
+            // after delay, replace thinking indicator with real response
             setTimeout(() => {
-                clearInterval(animInterval);
                 const response = ChatBot.getResponse(trimmedText);
                 setChatMessages(prevMessages => prevMessages.map(msg =>
                     msg.id === thinkingMessage.id
-                        ? { ...msg, message: response }
+                        ? { ...msg, message: response, isThinking: false }
                         : msg
                 ));
             }, THINK_DELAY);
@@ -81,7 +74,7 @@
         );
     }
 
-    function ChatMessage({message,sender}){
+    function ChatMessage({message,sender,isThinking}){
         const robotAvatar = 'https://img.icons8.com/fluency/48/000000/robot-2.png';
         const userAvatar = 'https://img.icons8.com/fluency/48/000000/user-male-circle.png';
         return(
@@ -90,7 +83,11 @@
                     <img src={robotAvatar} alt="robot" />
                 )}
                 <div className={`message-bubble ${sender}`}>
-                    {message}
+                    {isThinking ? (
+                        <div className="spinner" aria-hidden="true"></div>
+                    ) : (
+                        message
+                    )}
                 </div>
                 {sender==='user' && (
                     <img src={userAvatar} alt="user" />
@@ -114,6 +111,7 @@
                         <ChatMessage
                             message={chatMessage.message}
                             sender={chatMessage.sender}
+                            isThinking={chatMessage.isThinking}
                             key={chatMessage.id}
                         />
                     );

@@ -64,6 +64,20 @@ body{
     word-break: break-word;
     line-height: 1.4;
 }
+
+/* Spinner shown while the bot is "thinking" */
+.spinner{
+    width:16px;
+    height:16px;
+    border:3px solid rgba(0,0,0,0.12);
+    border-top-color: #007bff;
+    border-radius:50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin{
+    to { transform: rotate(360deg); }
+}
 .message-bubble.robot{
     background: #f0f0f0;
     color: #111;
