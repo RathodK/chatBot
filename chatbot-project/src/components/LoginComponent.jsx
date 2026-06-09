@@ -1,5 +1,8 @@
 // LoginComponent.js - defines the LoginPage React component
 // This file is loaded with type="text/babel" so JSX is supported in-browser.
+import PropTypes from 'prop-types';
+import React from 'react';
+import '../css/App.css';
 
 function LoginPage({onLogin}){
     const [username, setUsername] = React.useState('');
@@ -15,7 +18,7 @@ function LoginPage({onLogin}){
             const raw = localStorage.getItem('registeredUser');
             if (!raw) return null;
             return JSON.parse(raw);
-        }catch(e){
+        } catch {
             return null;
         }
     }
@@ -77,3 +80,9 @@ function LoginPage({onLogin}){
 
 // Expose component globally so inline JSX in ChatBot.html can use <LoginPage />
 window.LoginPage = LoginPage;
+
+LoginPage.propTypes = {
+    onLogin: PropTypes.func.isRequired
+};
+
+export default LoginPage;

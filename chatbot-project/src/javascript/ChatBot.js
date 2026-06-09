@@ -15,3 +15,5 @@ const ChatBot = {
 };
 
 if (typeof window !== 'undefined') window.ChatBot = ChatBot;
+
+export default ChatBot;

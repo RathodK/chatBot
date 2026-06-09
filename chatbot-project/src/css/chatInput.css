@@ -1,0 +1,26 @@
+.chat-input-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 700px;
+}
+
+.chat-input-row input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+.chat-input-row button {
+    padding: 10px 16px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background: #007bff;
+    color: white;
+}

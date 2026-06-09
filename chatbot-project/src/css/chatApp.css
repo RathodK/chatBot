@@ -1,0 +1,85 @@
+.chat-shell {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+}
+
+.chat-shell .position-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.chat-shell .position-controls button {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    background: #fff;
+    cursor: pointer;
+}
+
+.chat-area {
+    display: flex;
+    width: 100%;
+    max-width: 700px;
+    gap: 10px;
+}
+
+.chat-shell.position-top .chat-area,
+.chat-shell.position-bottom .chat-area {
+    flex-direction: column;
+}
+
+.chat-shell.position-left .chat-area,
+.chat-shell.position-right .chat-area {
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.chat-shell.position-top .chat-input-row,
+.chat-shell.position-bottom .chat-input-row {
+    width: 100%;
+    max-width: 700px;
+}
+
+.chat-shell.position-left .chat-input-row,
+.chat-shell.position-right .chat-input-row {
+    width: 240px;
+    min-width: 160px;
+    align-self: stretch;
+}
+
+.chat-shell.position-left .chat-messages {
+    order: 1;
+    flex: 1;
+}
+
+.chat-shell.position-left .chat-input-row {
+    order: 0;
+}
+
+.chat-shell.position-right .chat-messages {
+    order: 0;
+    flex: 1;
+}
+
+.chat-shell.position-right .chat-input-row {
+    order: 1;
+}
+
+.chat-shell.position-top .chat-input-row {
+    order: 0;
+}
+
+.chat-shell.position-top .chat-messages {
+    order: 1;
+}
+
+.chat-shell.position-bottom .chat-messages {
+    order: 0;
+}
+
+.chat-shell.position-bottom .chat-input-row {
+    order: 1;
+}
